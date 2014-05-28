@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>APBionet Vote</title>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" />
+<script>
+function confirmChoice(choice){
+	var r = confirm("Are you sure you want to send your vote as '"+choice+"'");
+if (r == true) {
+    location.href='{{$link}}/'+choice;
+} else {
+    
+}
+}
+</script>
+</head>
+<body style="padding: 60px;">
+
+
+    <div class="container">
+
+     <div class="row">
+	  <div class="col-md-2"></div>
+	  <div class="col-md-8">
+	  	<p>Dear APBionet Member,</p>
+	  	<p></p>
+	  	<p>{{$title}}</p>
+	  	<div style="text-align:center; width: 100%;margin: 20px;">
+	  	@if($type=='approve')
+	  	<table style="width: 70%;">
+	  		<tr>
+	  			<td width="33%"><button type="button" class="btn btn-success btn-lg" onclick="confirmChoice('approve');">Approve</button></td>
+	  			<td width="33%"><button type="button" class="btn btn-danger btn-lg"  onclick="confirmChoice('disapprove');">Disapprove</button></td>
+	  			<td width="33%"><button type="button" class="btn btn-warning btn-lg"  onclick="confirmChoice('abstain');">Abstain</button></td>
+	  		</tr>
+	  	</table>
+	  	@elseif($type=='choicevote')
+	  		<form action="" method="post" class="form-horizontal">
+			  <div class="form-group">
+			    <label for="inputEmail3" class="col-sm-2 control-label">Your comment:</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="inputEmail3" name="comment" >
+			    </div>
+			  </div>
+
+			</form>
+	  	@else
+	  		<form action="" method="post" class="form-horizontal">
+	  			@foreach(choices as $choice)
+	  			<div class="checkbox">
+				    <label>
+				      <input type="checkbox" name='choices[]'> {{$choice->name}}
+				    </label>
+			  	</div>
+			  @endforeach
+
+			</form>
+	  	@endif
+	  
+  
+	  	</div>
+	  	<p>{{$des}}</p>
+	  </div>
+	  <div class="col-md-2"></div>
+	</div>
+
+    </div><!-- /.container -->
+
+
+
+</body>
+</html>
